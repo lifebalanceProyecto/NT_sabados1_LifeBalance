@@ -31,6 +31,29 @@ def simulacion_recomendaciones():
             "fecha": fechasimulada.strftime("%Y-%m-%d")
         }
 
+        #  Inyección de errores controlados (procesos estocásticos)
+        probabilidadError = random.random()
+
+        if probabilidadError < 0.1:  # 10%
+            recomendacion["id"] = random.choice([None, -1, 0])  # Error: id inválido
+            recomendacion["usuario_id"] = ""  # Error: usuario vacío
+
+        elif probabilidadError < 0.25:  # 15%
+            recomendacion["fecha"] = None  # Error: fecha nula
+
+        elif probabilidadError < 0.4:  # 15%
+            recomendacion["codigo_recomendacion"] = simulacion["codigo_recomendacion"].lower()  # Error formato
+            recomendacion["lista_recomendaciones"] = "Texto incorrecto"  # Error inconsistencia
+
+        elif probabilidadError < 0.7:  # 30%
+            recomendacion["sesion_id"] = None  # Error: sesión faltante
+
+        elif probabilidadError < 0.9:  # 20%
+            recomendacion|["motivo"] = random.choice(["Comida basura", "Sedentarismo"])  # Error: valores fuera de catálogo
+
+        # 10% restante queda sin errores (datos correctos)
+
+    
         recomendaciones.append(recomendacion)
 
     return recomendaciones
