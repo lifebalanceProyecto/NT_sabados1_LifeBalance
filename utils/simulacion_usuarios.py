@@ -4,7 +4,7 @@ import random
 def simular_usuarios(numeroUsuarios):
     # semilla de datos
     listaNombres = ["Camila Gomez", "Pedro Perez", "Juan Ramirez", "David Carvajal", "Alexander Ruiz", "Julian Cuartas"]
-    listaCorreos = ["camila123@yopmail", "hermoxx123@yopmail.com", "bebe@yopmail.com", "terreneitor@yopmail.com", "cuajo@yopmail.com", "alien@yopmail.com"]
+    listaCorreos = ["camila123@yopmail.com", "hermoxx123@yopmail.com", "bebe@yopmail.com", "terreneitor@yopmail.com", "cuajo@yopmail.com", "alien@yopmail.com"]
     listaPass = ["ASD123", "DSA47", "KRE765", "KOF654", "KOL000", "POP666", "KKK898"]
     listaSexo = ["femenino", "masculino", "no binario"]
 

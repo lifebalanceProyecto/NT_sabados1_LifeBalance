@@ -1,0 +1,8 @@
+import pandas as pd
+from utils.simulacion_usuarios import simular_usuarios
+from notebook.limpieza_usuarios import limpiar_usuarios
+
+simulaciones_usuarios = simular_usuarios(100)
+simulaciones_ordenadas_usuarios = pd.DataFrame(simulaciones_usuarios)
+simulaciones_limpias_usuarios = limpiar_usuarios(simulaciones_ordenadas_usuarios)
+print(simulaciones_limpias_usuarios)
