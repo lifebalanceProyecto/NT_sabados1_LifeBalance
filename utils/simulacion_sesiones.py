@@ -3,9 +3,9 @@ import random
 def simular_sesiones(numeroSesiones):
     
 
-    listaNombres=["Meditacion para dormir","Respiracion","Pausa Activa Oficina","Estiramiento"]
-    listaTipo=["Meditacion","Respiracion","Pausa","Estiramiento"]
-    listaMinutos=[5,10,15,20]
+    listaNombres=["meditacion para dormir","respiracion","pausa activa oficina","estiramiento"]
+    listaTipo=["meditacion","respiracion","pausa","estiramiento"]
+    listaMinutos=[5,10,15,20,25,30]
 
     sesiones=[]
 
