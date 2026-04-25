@@ -42,14 +42,14 @@ def simulacion_recomendaciones():
             recomendacion["fecha"] = None  # Error: fecha nula
 
         elif probabilidadError < 0.4:  # 15%
-            recomendacion["codigo_recomendacion"] = simulacion["codigo_recomendacion"].lower()  # Error formato
+            recomendacion["codigo_recomendacion"] = recomendacion["codigo_recomendacion"].lower()  # Error formato
             recomendacion["lista_recomendaciones"] = "Texto incorrecto"  # Error inconsistencia
 
         elif probabilidadError < 0.7:  # 30%
             recomendacion["sesion_id"] = None  # Error: sesión faltante
 
         elif probabilidadError < 0.9:  # 20%
-            recomendacion|["motivo"] = random.choice(["Comida basura", "Sedentarismo"])  # Error: valores fuera de catálogo
+            recomendacion["motivo"] = random.choice(["Comida basura", "Sedentarismo"])  # Error: valores fuera de catálogo
 
         # 10% restante queda sin errores (datos correctos)
 
