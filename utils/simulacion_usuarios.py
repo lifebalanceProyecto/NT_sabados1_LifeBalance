@@ -49,10 +49,3 @@ def simular_usuarios(numeroUsuarios):
         usuarios.append(usuario)
 
     return usuarios
-
-
-# ✅ Esto llama la función y muestra los resultados
-if __name__ == "__main__":
-    usuarios = simular_usuarios(10)
-    for u in usuarios:
-        print(u)
