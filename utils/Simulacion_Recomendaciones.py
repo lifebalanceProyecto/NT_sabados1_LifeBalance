@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import random
 
-def simulacion_recomendaciones():
+def simulacion_recomendaciones(numero_recomendaciones=10):
 
     lista_recomendaciones = [
         "Recomendación 1: Mantén una dieta equilibrada y saludable.",
@@ -18,7 +18,7 @@ def simulacion_recomendaciones():
     recomendaciones = []
 
     # número de registros a generar (puedes cambiarlo)
-    for _ in range(10):
+    for _ in range(numero_recomendaciones):
         fechasimulada = fechainicial + timedelta(days=random.randint(0, 365))
 
         recomendacion = {

@@ -1,7 +1,7 @@
 import pandas as pd
 from notebook.descripcion_recomendaciones import describir_datos_recomendaciones
 from notebook.limpieza_recomendaciones import limpiar_recomendaciones
-from utils import Simulacion_Recomendaciones
+from utils.Simulacion_Recomendaciones import simulacion_recomendaciones
 from utils.simulacion_usuarios import simular_usuarios
 from notebook.limpieza_usuarios import limpiar_usuarios
 from utils.simulacion_sesiones import simular_sesiones
@@ -22,7 +22,7 @@ print(simulaciones_limpias_sesiones)
 describir_datos(simulaciones_limpias_sesiones)
 describir_datos_usuarios(simulaciones_limpias_usuarios)
 
-simulacion_recomendaciones = Simulacion_Recomendaciones(50)
+simulacion_recomendaciones = simulacion_recomendaciones(50)
 simulaciones_ordenadas_recomendaciones = pd.DataFrame(simulacion_recomendaciones)
 simulaciones_limpias_recomendaciones = limpiar_recomendaciones(simulaciones_ordenadas_recomendaciones)
 describir_datos_recomendaciones(simulaciones_limpias_recomendaciones)
