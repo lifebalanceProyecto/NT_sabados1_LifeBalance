@@ -1,13 +1,13 @@
 import pandas as pd
+from notebook.descripcion_recomendaciones import describir_datos_recomendaciones
+from notebook.limpieza_recomendaciones import limpiar_recomendaciones
+from utils.Simulacion_Recomendaciones import simulacion_recomendaciones
 from utils.simulacion_usuarios import simular_usuarios
 from notebook.limpieza_usuarios import limpiar_usuarios
 from utils.simulacion_sesiones import simular_sesiones
 from notebook.limpieza_sesiones import limpiar_sesiones
 from notebook.descripcion_sesiones import describir_datos
 from notebook.descripcion_usuarios import describir_datos_usuarios
-from utils.simulacion_recomendaciones import simulacion_recomendaciones
-from notebook.limpieza_recomendaciones import limpiar_recomendaciones
-from notebook.descripcion_recomendaciones import describir_datos_recomendaciones
 
 simulaciones_usuarios = simular_usuarios(100)
 simulaciones_ordenadas_usuarios = pd.DataFrame(simulaciones_usuarios)

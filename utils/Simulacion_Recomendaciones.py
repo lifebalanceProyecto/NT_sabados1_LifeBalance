@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import random
 
-def simulacion_recomendaciones():
+def simulacion_recomendaciones(numero_recomendaciones=10):
 
     lista_recomendaciones = [
         "Recomendación 1: Mantén una dieta equilibrada y saludable.",
@@ -18,7 +18,7 @@ def simulacion_recomendaciones():
     recomendaciones = []
 
     # número de registros a generar (puedes cambiarlo)
-    for _ in range(10):
+    for _ in range(numero_recomendaciones):
         fechasimulada = fechainicial + timedelta(days=random.randint(0, 365))
 
         recomendacion = {
@@ -42,14 +42,14 @@ def simulacion_recomendaciones():
             recomendacion["fecha"] = None  # Error: fecha nula
 
         elif probabilidadError < 0.4:  # 15%
-            recomendacion["codigo_recomendacion"] = simulacion["codigo_recomendacion"].lower()  # Error formato
+            recomendacion["codigo_recomendacion"] = recomendacion["codigo_recomendacion"].lower()  # Error formato
             recomendacion["lista_recomendaciones"] = "Texto incorrecto"  # Error inconsistencia
 
         elif probabilidadError < 0.7:  # 30%
             recomendacion["sesion_id"] = None  # Error: sesión faltante
 
         elif probabilidadError < 0.9:  # 20%
-            recomendacion|["motivo"] = random.choice(["Comida basura", "Sedentarismo"])  # Error: valores fuera de catálogo
+            recomendacion["motivo"] = random.choice(["Comida basura", "Sedentarismo"])  # Error: valores fuera de catálogo
 
         # 10% restante queda sin errores (datos correctos)
 
