@@ -6,7 +6,7 @@ from utils.simulacion_usuarios import simular_usuarios
 from notebook.limpieza_usuarios import limpiar_usuarios
 from utils.simulacion_sesiones import simular_sesiones
 from notebook.limpieza_sesiones import limpiar_sesiones
-from notebook.descripcion_sesiones import describir_datos
+from notebook.descripcion_sesiones import describir_datos_sesiones
 from notebook.descripcion_usuarios import describir_datos_usuarios
 
 simulaciones_usuarios = simular_usuarios(100)
@@ -14,12 +14,12 @@ simulaciones_ordenadas_usuarios = pd.DataFrame(simulaciones_usuarios)
 simulaciones_limpias_usuarios = limpiar_usuarios(simulaciones_ordenadas_usuarios)
 print(simulaciones_limpias_usuarios)
 
-simulaciones_sesiones = simular_sesiones(20)
+simulaciones_sesiones = simular_sesiones(50)
 simulacion_ordenada_sesiones = pd.DataFrame(simulaciones_sesiones)
 simulaciones_limpias_sesiones = limpiar_sesiones(simulacion_ordenada_sesiones)
 print(simulaciones_limpias_sesiones)
 
-describir_datos(simulaciones_limpias_sesiones)
+describir_datos_sesiones(simulaciones_limpias_sesiones)
 describir_datos_usuarios(simulaciones_limpias_usuarios)
 
 simulacion_recomendaciones = simulacion_recomendaciones(50)

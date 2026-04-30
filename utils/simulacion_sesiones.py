@@ -25,8 +25,7 @@ def simular_sesiones(numeroSesiones):
             sesion["duracion"]=None
         elif probalidadError<0.4:
             sesion["tipo"]=sesion["tipo"].lower()
-            sesion["id"]=random.choice([-10000,0,200])
-            sesion["id"]=None
+            sesion["id"]=random.choice([-10000,0,200,None])
         elif probalidadError<0.7:
             sesion["tipo"]=0
         elif probalidadError<0.9:
