@@ -1,13 +1,14 @@
 import pandas as pd
 
-def transformar_datos(dataf_frame_limpio):
+def transformar_datos(data_frame_limpio):
 
-    # =========================
-    # 1. Cantidad de sesiones por tipo
-    # Grafica recomendada: Barras
-    # =========================
-    filtro1 = dataf_frame_limpio.query("duracion >= 0")
-    
+    # =====================================
+    # Transformación 1
+    # Cantidad de sesiones por tipo
+    # Gráfico recomendado: Barras
+    # =====================================
+    filtro1 = data_frame_limpio.query("duracion >= 0")
+
     agrupacion1 = (
         filtro1.groupby("tipo")["id"]
         .count()
@@ -15,12 +16,13 @@ def transformar_datos(dataf_frame_limpio):
     )
 
 
-    # =========================
-    # 2. Duración promedio por tipo
-    # Grafica recomendada: Líneas
-    # =========================
-    filtro2 = dataf_frame_limpio.query("duracion > 20")
-    
+    # =====================================
+    # Transformación 2
+    # Duración promedio por tipo
+    # Gráfico recomendado: Líneas
+    # =====================================
+    filtro2 = data_frame_limpio.query("duracion > 0")
+
     agrupacion2 = (
         filtro2.groupby("tipo")["duracion"]
         .mean()
@@ -28,12 +30,13 @@ def transformar_datos(dataf_frame_limpio):
     )
 
 
-    # =========================
-    # 3. Cantidad de sesiones por nombre
-    # Grafica recomendada: Torta
-    # =========================
-    filtro3 = dataf_frame_limpio.query("id > 0")
-    
+    # =====================================
+    # Transformación 3
+    # Cantidad de sesiones por nombre
+    # Gráfico recomendado: Torta
+    # =====================================
+    filtro3 = data_frame_limpio.query("id > 0")
+
     agrupacion3 = (
         filtro3.groupby("nombre")["id"]
         .count()
@@ -41,12 +44,13 @@ def transformar_datos(dataf_frame_limpio):
     )
 
 
-    # =========================
-    # 4. Duración total por nombre
-    # Grafica recomendada: Barras horizontales
-    # =========================
-    filtro4 = dataf_frame_limpio.query("duracion >= 30")
-    
+    # =====================================
+    # Transformación 4
+    # Duración total por nombre
+    # Gráfico recomendado: Barras
+    # =====================================
+    filtro4 = data_frame_limpio.query("duracion > 0")
+
     agrupacion4 = (
         filtro4.groupby("nombre")["duracion"]
         .sum()
@@ -54,28 +58,26 @@ def transformar_datos(dataf_frame_limpio):
     )
 
 
-    # =========================
-    # 5. Relación tipo vs duración promedio
-    # Grafica recomendada: Mapa de calor
-    # =========================
-    filtro5 = dataf_frame_limpio.query("duracion > 10")
-    
+    # =====================================
+    # Transformación 5
+    # Tipo vs nombre
+    # Gráfico recomendado: Mapa de calor
+    # =====================================
+    filtro5 = data_frame_limpio.query("duracion > 0")
+
     agrupacion5 = (
-        filtro5.pivot_table(
-            values="duracion",
-            index="tipo",
-            columns="nombre",
-            aggfunc="mean"
-        )
+        filtro5.groupby(["tipo", "nombre"])["id"]
+        .count()
+        .reset_index(name="conteo")
     )
 
 
     transformacion_resume = {
-        "conteoSesionesPorTipo": agrupacion1,
-        "promedioDuracionPorTipo": agrupacion2,
-        "cantidadSesionesPorNombre": agrupacion3,
-        "duracionTotalPorNombre": agrupacion4,
-        "mapaCalorTipoNombre": agrupacion5
+        "agrupacion1": agrupacion1,
+        "agrupacion2": agrupacion2,
+        "agrupacion3": agrupacion3,
+        "agrupacion4": agrupacion4,
+        "agrupacion5": agrupacion5
     }
 
     return transformacion_resume
