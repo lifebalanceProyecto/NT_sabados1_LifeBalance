@@ -1,30 +1,50 @@
 import pandas as pd
+
 from notebook.descripcion_recomendaciones import describir_datos_recomendaciones
 from notebook.limpieza_recomendaciones import limpiar_recomendaciones
 from utils.Simulacion_Recomendaciones import simulacion_recomendaciones
+
 from utils.simulacion_usuarios import simular_usuarios
 from notebook.limpieza_usuarios import limpiar_usuarios
-from utils.simulacion_sesiones import simular_sesiones
+from notebook.descripcion_usuarios import describir_datos_usuarios
+
 from notebook.limpieza_sesiones import limpiar_sesiones
 from notebook.descripcion_sesiones import describir_datos_sesiones
-from notebook.descripcion_usuarios import describir_datos_usuarios
 from notebook.transformacion_sesiones import transformar_datos
 from notebook.graficacion_sesiones import (graficar_barras,graficar_lineas,graficar_torta,graficar_mapa_calor)
+from notebook.consumo_sesiones import consumir_tabla_sesion
 
 simulaciones_usuarios = simular_usuarios(100)
 simulaciones_ordenadas_usuarios = pd.DataFrame(simulaciones_usuarios)
 simulaciones_limpias_usuarios = limpiar_usuarios(simulaciones_ordenadas_usuarios)
 print(simulaciones_limpias_usuarios)
+describir_datos_usuarios(simulaciones_limpias_usuarios)
 
-simulaciones_sesiones = simular_sesiones(100)
-simulacion_ordenada_sesiones = pd.DataFrame(simulaciones_sesiones)
-simulaciones_limpias_sesiones = limpiar_sesiones(simulacion_ordenada_sesiones)
-print(simulaciones_limpias_sesiones)
+simulacion_recomendaciones = simulacion_recomendaciones(50)
+simulaciones_ordenadas_recomendaciones = pd.DataFrame(simulacion_recomendaciones)
+simulaciones_limpias_recomendaciones = limpiar_recomendaciones(simulaciones_ordenadas_recomendaciones)
+describir_datos_recomendaciones(simulaciones_limpias_recomendaciones)
 
 
-describir_datos_sesiones(simulaciones_limpias_sesiones)
+# SESIONES
 
-# Transformación de datos de sesiones
+sesiones = consumir_tabla_sesion()
+
+simulacion_ordenada_sesiones = pd.DataFrame(
+    sesiones
+)
+
+simulaciones_limpias_sesiones = limpiar_sesiones(
+    simulacion_ordenada_sesiones
+)
+
+describir_datos_sesiones(
+    simulaciones_limpias_sesiones
+)
+
+agrupaciones_sesiones = transformar_datos(
+    simulaciones_limpias_sesiones
+)
 agrupaciones_sesiones = transformar_datos(simulaciones_limpias_sesiones)
 
 # Gráfico de barras: cantidad de sesiones por tipo
@@ -67,9 +87,5 @@ graficar_mapa_calor(
     nombre_archivo="mapa_calor_sesiones.png"
 )
 
-describir_datos_usuarios(simulaciones_limpias_usuarios)
 
-simulacion_recomendaciones = simulacion_recomendaciones(50)
-simulaciones_ordenadas_recomendaciones = pd.DataFrame(simulacion_recomendaciones)
-simulaciones_limpias_recomendaciones = limpiar_recomendaciones(simulaciones_ordenadas_recomendaciones)
-describir_datos_recomendaciones(simulaciones_limpias_recomendaciones)
+

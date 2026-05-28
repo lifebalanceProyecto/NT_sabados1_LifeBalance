@@ -12,6 +12,10 @@ import os
 RUTA_GRAFICOS = os.path.join(
     os.path.dirname(__file__),
     "..",
+    "..",
+    "LifeBalanceFrontend",
+    "src",
+    "assets",
     "graficos"
 )
 
