@@ -4,23 +4,38 @@ def limpiar_sesiones(data_frame_sucio):
 
     data_frame_limpio = data_frame_sucio.copy()
 
-    # Limpiar textos
-    columnas_texto = ["nombre", "tipo"]
+    # Renombrar columnas
+    data_frame_limpio = data_frame_limpio.rename(columns={
+        "id_sesion": "id",
+        "usuario_id": "usuario"
+    })
 
-    for columna in columnas_texto:
-        data_frame_limpio[columna] = (
-            data_frame_limpio[columna]
-            .astype("string")
-            .str.strip()
-            .str.lower()
-        )
+    # -----------------------------
+    # LIMPIEZA DE TEXTOS
+    # -----------------------------
 
-    # Tipos válidos definidos por el backend
+    data_frame_limpio["nombre"] = (
+        data_frame_limpio["nombre"]
+        .astype("string")
+        .str.strip()
+        .str.lower()
+    )
+
+    data_frame_limpio["tipo"] = (
+        data_frame_limpio["tipo"]
+        .astype("string")
+        .str.strip()
+        .str.lower()
+    )
+
+    # Valores esperados
     tipos_validos = [
         "meditacion",
         "respiracion",
-        "pausa",
-        "estiramiento"
+        "relajacion",
+        "estiramiento",
+        "caminata",
+        "yoga"
     ]
 
     data_frame_limpio["tipo"] = (
@@ -31,42 +46,37 @@ def limpiar_sesiones(data_frame_sucio):
         )
     )
 
-    # Conversión numérica
-    data_frame_limpio["id"] = (
-        pd.to_numeric(
-            data_frame_limpio["id"],
-            errors="coerce"
-        )
-        .astype("Int64")
+    # -----------------------------
+    # LIMPIEZA NUMERICA
+    # -----------------------------
+
+    data_frame_limpio["id"] = pd.to_numeric(
+        data_frame_limpio["id"],
+        errors="coerce"
     )
 
-    data_frame_limpio["duracion"] = (
-        pd.to_numeric(
-            data_frame_limpio["duracion"],
-            errors="coerce"
-        )
-        .astype("Int64")
+    data_frame_limpio["duracion"] = pd.to_numeric(
+        data_frame_limpio["duracion"],
+        errors="coerce"
     )
 
-    # Duraciones válidas
-    duraciones_validas = [
-        5,
-        10,
-        15,
-        20,
-        25,
-        30
-    ]
-
-    data_frame_limpio["duracion"] = (
-        data_frame_limpio["duracion"]
-        .where(
-            data_frame_limpio["duracion"].isin(duraciones_validas),
-            pd.NA
-        )
+    # Valores válidos
+    data_frame_limpio = (
+        data_frame_limpio[
+            data_frame_limpio["id"] > 0
+        ]
     )
 
-    # Campos obligatorios
+    data_frame_limpio = (
+        data_frame_limpio[
+            data_frame_limpio["duracion"] > 0
+        ]
+    )
+
+    # -----------------------------
+    # DATOS VACIOS
+    # -----------------------------
+
     columnas_obligatorias = [
         "id",
         "nombre",
@@ -75,20 +85,9 @@ def limpiar_sesiones(data_frame_sucio):
     ]
 
     data_frame_limpio = (
-        data_frame_limpio
-        .dropna(subset=columnas_obligatorias)
-    )
-
-    # IDs positivos
-    data_frame_limpio = (
-        data_frame_limpio[
-            data_frame_limpio["id"] > 0
-        ]
-    )
-
-    # Eliminar duplicados
-    data_frame_limpio = (
-        data_frame_limpio.drop_duplicates()
+        data_frame_limpio.dropna(
+            subset=columnas_obligatorias
+        )
     )
 
     return data_frame_limpio

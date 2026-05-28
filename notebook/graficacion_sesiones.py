@@ -14,8 +14,8 @@ RUTA_GRAFICOS = os.path.join(
     "..",
     "..",
     "LifeBalanceFrontend",
-    "src",
-    "assets",
+    "output_frontend",
+    "public",
     "graficos"
 )
 
