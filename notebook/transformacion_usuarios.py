@@ -1,6 +1,6 @@
 import pandas as pd
 
-def transformar_datos(data_frame_limpio):
+def transformar_datos_usuarios(data_frame_limpio):
 
     # ==============================
     # 1. Conteo de usuarios por sexo
