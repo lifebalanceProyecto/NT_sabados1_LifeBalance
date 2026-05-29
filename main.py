@@ -7,6 +7,10 @@ from utils.Simulacion_Recomendaciones import simulacion_recomendaciones
 from utils.simulacion_usuarios import simular_usuarios
 from notebook.limpieza_usuarios import limpiar_usuarios
 from notebook.descripcion_usuarios import describir_datos_usuarios
+from notebook.consumo_usuarios import consumir_servicios_tabla_servicios
+from notebook.transformacion_usuarios import transformar_datos_usuarios
+from notebook.graficacion_usuarios import (graficar_barras,graficar_lineas,graficar_torta,graficar_mapa_calor)
+ 
 
 from notebook.limpieza_sesiones import limpiar_sesiones
 from notebook.descripcion_sesiones import describir_datos_sesiones
@@ -86,6 +90,88 @@ graficar_mapa_calor(
     paleta_color="YlOrRd",
     nombre_archivo="mapa_calor_sesiones.png"
 )
+
+
+
+# ==========================================
+# USUARIOS
+# ==========================================
+describir_datos_usuarios(
+    simulaciones_limpias_usuarios
+)
+
+# ==========================================
+# TRANSFORMACIONES
+# ==========================================
+agrupaciones_usuarios = transformar_datos(
+    simulaciones_limpias_usuarios
+)
+
+# ==========================================
+# GRÁFICO DE TORTA
+# Usuarios por sexo
+# ==========================================
+graficar_torta(
+    agrupaciones_usuarios["agrupacion1"],
+    columna_etiquetas="sexo",
+    columna_valores="conteoUsuarios",
+    titulo="Distribucion de usuarios por sexo",
+    nombre_archivo="torta_usuarios_sexo.png"
+)
+
+# ==========================================
+# GRÁFICO DE LÍNEAS
+# Usuarios por fecha creación
+# ==========================================
+graficar_lineas(
+    agrupaciones_usuarios["agrupacion2"],
+    columna_eje_x="fecha_creacion",
+    columna_eje_y="conteoUsuarios",
+    titulo="Usuarios creados por fecha",
+    color_linea="#2196F3",
+    nombre_archivo="lineas_usuarios_fecha.png"
+)
+
+# ==========================================
+# GRÁFICO DE BARRAS
+# Usuarios ID alto por sexo
+# ==========================================
+graficar_barras(
+    agrupaciones_usuarios["agrupacion3"],
+    columna_categorias="sexo",
+    columna_valores="conteoUsuarios",
+    titulo="Usuarios con ID alto por sexo",
+    color_barras="#4CAF50",
+    nombre_archivo="barras_usuarios_id_alto.png"
+)
+
+# ==========================================
+# GRÁFICO DE BARRAS
+# Correos por dominio
+# ==========================================
+graficar_barras(
+    agrupaciones_usuarios["agrupacion4"],
+    columna_categorias="dominio_correo",
+    columna_valores="conteoCorreos",
+    titulo="Cantidad de correos por dominio",
+    color_barras="#FF9800",
+    nombre_archivo="barras_correos_dominio.png"
+)
+
+# ==========================================
+# MAPA DE CALOR
+# Sexo vs fecha creación
+# ==========================================
+graficar_mapa_calor(
+    agrupaciones_usuarios["agrupacion5"],
+    columna_filas="fecha_creacion",
+    columna_columnas="sexo",
+    columna_valores="conteo",
+    titulo="Relacion sexo vs fecha creacion",
+    paleta_color="YlOrRd",
+    nombre_archivo="mapa_calor_usuarios.png"
+)
+
 
 
 
